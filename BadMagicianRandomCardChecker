@@ -1,0 +1,13 @@
+import java.util.ArrayList;
+
+public class BadMagicianRandomCardChecker {
+    private ArrayList<String> usedCards = new ArrayList<>();
+
+    public void putCardAway(String card) {
+        usedCards.add(card);
+    }
+
+    public boolean hasCard(String card) {
+        return usedCards.contains(card);
+    }
+}
