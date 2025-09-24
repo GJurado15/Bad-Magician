@@ -1,0 +1,53 @@
+import java.util.Scanner;
+
+public class BadMagicianDriver {
+
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		AskYesOrNo validator = new AskYesOrNo();
+		BadMagicianRandomCard card = new BadMagicianRandomCard();
+		BadMagicianRandomCardChecker notThisCard = new BadMagicianRandomCardChecker();
+		int counter = 1;
+
+		System.out.println(
+				"Let's play a game. \nPick a card from a standard 52 card deck and keep track of it. \nI'll try to guess it.");
+		//System.out.println("No jokers. This is serious business.");
+		System.out.println("Would you like to play? (y/n)");
+
+		String confirmation = validator.askYesOrNo(input);
+
+		if (confirmation.equals("n")) {
+			System.out.println("Okay, have a good one.");
+			System.exit(0);
+		}
+
+		System.out.print("Is your card the ");
+		String guess = card.getCard(notThisCard);
+		System.out.println(guess + "?");
+
+		confirmation = validator.askYesOrNo(input);
+
+		while (confirmation.equals("n")) {
+			notThisCard.putCardAway(guess);
+			counter++;
+
+			System.out.print("Maybe the ");
+			guess = card.getCard(notThisCard);
+			System.out.println(guess + " is your card?");
+
+			confirmation = validator.askYesOrNo(input);
+		}
+
+		if (confirmation.equals("y")) {
+			System.out.println("Aha! I knew your card would be the " + guess + ".");
+			System.out.print("And I only got it in " + counter);
+			if (counter == 1) {
+				System.out.println(" try.");
+			} else {
+				System.out.println(" tries.");
+			}
+		}
+
+		input.close();
+	}
+}
