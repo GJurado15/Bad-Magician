@@ -1,0 +1,12 @@
+import java.util.Scanner;
+
+public class AskYesOrNo {
+	public String askYesOrNo(Scanner input) {
+		String response = input.nextLine().trim();
+		while (!response.equalsIgnoreCase("y") && !response.equalsIgnoreCase("n")) {
+			System.out.println("Please type y or n:");
+			response = input.nextLine().trim();
+		}
+		return response.toLowerCase();
+	}
+}
